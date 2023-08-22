@@ -180,8 +180,39 @@ const GrnForm = ({
 							status={1}
 						/>
 					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							maxLength={25}
+							label="Vehicle Number"
+							name="vehicle_no"
+							placeholder="Enter Vehicle Number"
+							disabled={isViewOnly}
+						/>
+					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							maxLength={40}
+							label="Security Inward Number"
+							name="security_inward_no"
+							placeholder="Enter Security Inward Number"
+							disabled={isViewOnly}
+						/>
+					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							type="date"
+							max="9999-12-31"
+							label="Security Inward Date"
+							name="security_inward_date"
+							placeholder="Enter Security Inward Date"
+							disabled={isViewOnly}
+						/>
+					</Col>
 				</Row>
-				<Row>
+				{/* <Row>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormTextField}
@@ -226,8 +257,21 @@ const GrnForm = ({
 							query={{ party_type: "Vendor" }}
 						/>
 					</Col>
-				</Row>
+				</Row> */}
 				<Row>
+				<Col className="mb-1">
+						<Field
+							component={ReduxFormAsyncSelect}
+							name="supplier_id"
+							label="Supplier Name"
+							disabled={isFetchingDropdown || isViewOnly}
+							touched={meta?.supplier_id?.touched}
+							error={errors?.supplier_id}
+							masterDropdownName="party"
+							placeholder="Supplier Name"
+							query={{ party_type: "Vendor" }}
+						/>
+					</Col>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormTextField}
@@ -270,8 +314,6 @@ const GrnForm = ({
 							disabled={isViewOnly}
 						/>
 					</Col>
-				</Row>
-				<Row>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormAsyncSelect}
@@ -284,6 +326,20 @@ const GrnForm = ({
 							masterDropdownName="lot"
 						/>
 					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormSelectField}
+							name="returnable_type"
+							label="Returnable"
+							disabled={isFetchingDropdown || isViewOnly}
+							options={returnableTypeOptions}
+							touched={meta?.returnable_type?.touched}
+							error={errors?.returnable_type}
+							placeholder="Returnable Type"
+						/>
+					</Col>
+				</Row>
+				<Row>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormAsyncSelect}
@@ -331,20 +387,6 @@ const GrnForm = ({
 							placeholder="Select UOM"
 						/>
 					</Col>
-				</Row>
-				<Row>
-					<Col className="mb-1">
-						<Field
-							component={ReduxFormSelectField}
-							name="returnable_type"
-							label="Returnable"
-							disabled={isFetchingDropdown || isViewOnly}
-							options={returnableTypeOptions}
-							touched={meta?.returnable_type?.touched}
-							error={errors?.returnable_type}
-							placeholder="Returnable Type"
-						/>
-					</Col>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormSelectField}
@@ -368,7 +410,10 @@ const GrnForm = ({
 							error={errors?.grade}
 						/>
 					</Col>
-					<Col className="mb-1">
+				</Row>
+				
+				<Row>
+				<Col className="mb-1">
 						<Field
 							component={ReduxFormAsyncSelect}
 							name="yarn_quality_id"
@@ -392,8 +437,6 @@ const GrnForm = ({
 							disabled={isViewOnly}
 						/>
 					</Col>
-				</Row>
-				<Row>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormTextField}
@@ -438,6 +481,7 @@ const GrnForm = ({
 							disabled
 						/>
 					</Col>
+					
 				</Row>
 				<Row className="mt-2">
 					<FieldArray

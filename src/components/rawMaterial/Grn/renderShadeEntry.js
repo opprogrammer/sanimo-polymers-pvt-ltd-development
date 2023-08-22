@@ -67,7 +67,7 @@ export const renderShadeEntry = ({
 		<>
 		<div
 						className="h-100"
-						style={{ overflowY: "auto", maxHeight: "40vh"}}
+						style={{ overflowY: "auto", maxHeight: "50vh"}}
 					>
 
 			{fields.map((shade_entry, index) => {
@@ -128,8 +128,6 @@ export const renderShadeEntry = ({
 											disabled={isViewOnly}
 										/>
 									</Col>
-								</Row>
-								<Row>
 									<Col className="mb-1">
 										<Field
 											label="Tare Weight"
@@ -190,6 +188,67 @@ export const renderShadeEntry = ({
 										/>
 									</Col>
 								</Row>
+								{/* <Row>
+									<Col className="mb-1">
+										<Field
+											label="Tare Weight"
+											name={`${shade_entry}.tare_weight`}
+											component={ReduxFormTextFieldShade}
+											type="number"
+											onWheel={e => onWheelHandler(e)}
+											placeholder="Tare weight"
+											disabled={isViewOnly}
+										/>
+									</Col>
+									<Col className="mb-1">
+										<Field
+											label="Net Weight"
+											name={`${shade_entry}.net_weight`}
+											component={ReduxFormTextFieldShade}
+											type="number"
+											onWheel={e => onWheelHandler(e)}
+											onChange={e => {
+												updateAmount(index, e.target.value);
+												updateAvgWeight(index, noOfCheese, e.target.value);
+											}}
+											placeholder="Net Weight"
+											disabled={isViewOnly}
+										/>
+									</Col>
+									<Col className="mb-1">
+										<Field
+											label="Average Weight"
+											name={`${shade_entry}.average_weight`}
+											component={ReduxFormTextFieldShade}
+											type="number"
+											onWheel={e => onWheelHandler(e)}
+											placeholder="Average weight"
+											disabled
+										/>
+									</Col>
+									<Col className="mb-1">
+										<Field
+											label="API Weight"
+											name={`${shade_entry}.api_weight`}
+											component={ReduxFormTextFieldShade}
+											type="number"
+											onWheel={e => onWheelHandler(e)}
+											placeholder="API weight"
+											disabled
+										/>
+									</Col>
+									<Col className="mb-1">
+										<Field
+											label="Amount"
+											name={`${shade_entry}.amount`}
+											component={ReduxFormTextFieldShade}
+											type="number"
+											onWheel={e => onWheelHandler(e)}
+											placeholder="Amount"
+											disabled
+										/>
+									</Col>
+								</Row> */}
 								<Row>
 									{isReturnable && (
 										<>
