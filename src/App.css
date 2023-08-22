@@ -1,0 +1,208 @@
+:root {
+	--custom-green: #198754;
+	--custom-white: #ffffff;
+	--custom-black: #000000;
+	--custom-red: #ca2c33;
+	--custom-grey: #f5f5f5;
+	--custom-blue: #0d6efd;
+	--custom-orange: #f7525a;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+.color-white {
+	color: var(--custom-white);
+}
+
+.color-orange {
+	color: var(--custom-orange);
+}
+
+.bg-color-orange {
+	background-color: var(--custom-orange);
+}
+
+.color-black {
+	color: var(--custom-black);
+}
+
+.fw-500 {
+	font-weight: 500;
+}
+
+.fs-7 {
+	font-size: 0.9rem;
+}
+
+.login-page-bg {
+	background-color: var(--custom-grey);
+}
+
+/* bootstrap classes */
+.table-btn:hover {
+	background-color: var(--custom-red);
+	color: var(--custom-white);
+}
+
+.page-link {
+	font-weight: 500;
+	color: var(--custom-orange);
+}
+
+.page-link:hover,
+.page-link:focus {
+	color: var(--custom-orange);
+}
+
+.active > .page-link {
+	color: var(--custom-white);
+	background-color: var(--custom-orange);
+	border: 1px solid var(--custom-orange);
+	font-weight: 500;
+}
+
+/* antd classes */
+
+.ant-table-content {
+	overflow-x: auto;
+}
+
+.ant-table-cell {
+	padding: 10px !important;
+}
+
+.ant-dropdown-menu {
+	min-width: 130px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.ant-segmented-item {
+	height: 30px;
+	width: auto;
+	min-width: 80px;
+}
+
+.ant-segmented-item-label {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+}
+
+.ant-segmented-item-selected {
+	background-color: var(--custom-orange) !important;
+	color: var(--custom-white) !important;
+}
+
+.ant-dropdown-menu-item {
+	padding: 0px !important;
+	width: 100%;
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+	background-color: var(--custom-white) !important;
+}
+
+.ant-menu-item-selected {
+	background-color: var(--custom-orange) !important;
+}
+
+.ant-menu-inline-collapsed > .ant-menu-item {
+	padding-inline: calc(50% - 15px) !important;
+}
+
+.ant-menu-item:active {
+	background-color: var(--custom-orange) !important;
+}
+
+.ant-menu-submenu-title:active {
+	background-color: var(--custom-orange) !important;
+}
+
+.ant-menu-title-content {
+	font-weight: 500;
+	font-size: 1.1rem;
+}
+
+.ant-notification-topRight {
+	z-index: 1099; /*bootstrap modal has z-index 1055. To show notifications above it setting z-index to 1099 here.*/
+}
+
+.ant-notification-notice_success {
+	background-color: var(--custom-green) !important;
+}
+
+.ant-notification-notice_error {
+	background-color: var(--custom-orange) !important;
+}
+
+.ant-notification-notice-message {
+	color: var(--custom-white) !important;
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.ant-notification-notice-close {
+	color: var(--custom-white) !important;
+}
+
+.logout-btn:hover {
+	color: var(--custom-black) !important;
+}
+
+.css-16xfy0z-control {
+	background-color: #e9ecef !important;
+}
+
+.css-olqui2-singleValue {
+	color: black !important;
+}
+
+.subform-table-item {
+	display: inline-grid;
+	width: 180px;
+	margin-left: 15px;
+	margin-bottom: 0 !important;
+}
+
+::-webkit-scrollbar {
+	height: 10px;
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	margin: 3px 0;
+	border-radius: 10px;
+	background-color: #e3e3e3;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	border: 4px solid rgba(0, 0, 0, 0);
+	background-color: #ababab;
+}
+
+.ant-tabs-tab-active {
+	background-color: var(--custom-orange) !important;
+}
+
+.ant-tabs-tab-btn {
+	font-size: 1.1rem !important;
+	font-weight: 500 !important;
+}
+
+.ant-tabs-tab-btn:hover,
+.ant-tabs-tab-btn:focus {
+	color: var(--custom-black) !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+	color: var(--custom-white) !important;
+}
