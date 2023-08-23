@@ -16,7 +16,7 @@ import { ReduxFormTextField } from "utils/ReduxFormTextField";
 import axios from "axios";
 import apiConfig from "actions/apiConfig";
 import { MdClose } from "react-icons/md";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import {
 	getIsFetchingDropdownList,
 	getIsUpdatingMasterList,
@@ -42,7 +42,7 @@ import { renderShadeEntry } from "./renderShadeEntry";
 const formName = "grn";
 const formSelector = formValueSelector(formName);
 
-const GrnForm = ({
+ const GrnForm = ({
 	title,
 	onCancel,
 	handleSubmit,
@@ -100,6 +100,29 @@ const GrnForm = ({
 		);
 	};
 
+	// const [sum,setSum]=useState();
+	//  export function cheese(noOfCheese) {
+	// 	setSum(sum + noOfCheese);
+	// } 
+	
+
+	
+		let totalCheese = 0;
+		let NetWeight = 0;
+		shadeEntry?.forEach(se => {
+			NetWeight += +se?.net_weight || 0;
+			totalCheese += +se?.no_of_cheese || 0;
+		});
+
+		
+		dispatch(change(formName, "total_cheese", totalCheese));
+		dispatch(change(formName, "total_net_weight", NetWeight.toFixed(4)));
+
+		
+		
+	
+
+	
 	useEffect(() => {
 		let totalAmount = shadeEntry?.reduce((acc, shadeEnt) => {
 			return acc + (+shadeEnt?.amount || 0);
@@ -497,8 +520,22 @@ const GrnForm = ({
 						isReturnable={returnableType === "Returnable"}
 						typeOfPacking={typeOfPacking}
 					/>
+					<Col></Col>
+					<Col className="mt-2">
+					<h5>Total Cheese : {totalCheese}</h5>		
+					</Col>
+					<Col></Col>
+					<Col className="mt-2">
+					<h5>Net.Weight : {NetWeight}</h5>
+					</Col>
+					<Col></Col>
+					<Col></Col>
+					<Col className="mt-2">
+					{renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)}
+					</Col>
 				</Row>
-			{renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)}
+		
+			{/* {renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)} */}
 		</form>
 	);
 };

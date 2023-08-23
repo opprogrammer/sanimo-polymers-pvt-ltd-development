@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Field } from "redux-form";
 
@@ -7,6 +7,7 @@ import { ReduxFormTextField } from "utils/ReduxFormTextField";
 import { onWheelHandler } from "utils/onWheelHandler";
 import { returnableItemOptions } from "./grnConstants";
 import { ReduxFormTextFieldShade,ReduxFormAsyncSelectShade,ReduxFormSelectFieldShade } from "utils/shadeField";
+
 
 export const renderShadeEntry = ({
 	fields,
@@ -52,6 +53,8 @@ export const renderShadeEntry = ({
 				)}
 			</div>
 
+			
+
 			{fields?.length === 0 && (
 				<>
 					<h6 className="m-3 text-center">
@@ -69,13 +72,17 @@ export const renderShadeEntry = ({
 						className="h-100"
 						style={{ overflowY: "auto", maxHeight: "50vh"}}
 					>
-
+				
+			
+			
 			{fields.map((shade_entry, index) => {
 				const netWeight = +shadeEntry?.[index]?.net_weight || 0;
 				const noOfCheese = +shadeEntry?.[index]?.no_of_cheese || 0;
 				const returnableItem = shadeEntry?.[index]?.returnable_item || [];
+			
 
 				return (
+					<>
 					<Fragment key={index} >
 						<div className="d-flex align-items-center w-100 ">
 							<div className="align-self-start w-100">
@@ -99,9 +106,9 @@ export const renderShadeEntry = ({
 											type="number"
 											onWheel={e => onWheelHandler(e)}
 											placeholder="Number of Cheese"
-											onChange={e =>
-												updateAvgWeight(index, e.target.value, netWeight)
-											}
+											onChange={e =>{
+												updateAvgWeight(index, e.target.value, netWeight);
+											}}
 											disabled={isViewOnly}
 										/>
 									</Col>
@@ -351,14 +358,21 @@ export const renderShadeEntry = ({
 						
 						<hr className="w-100 m-4" />
 						
+						
 					</Fragment>
 				
+				</>
 				);
-			})}
+				
+			})
+			}
 			</div>
+			
 		</>
 			</div>
 			
 	
 	);
+
+	
 };
