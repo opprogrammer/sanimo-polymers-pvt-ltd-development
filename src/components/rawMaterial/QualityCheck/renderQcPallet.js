@@ -85,7 +85,7 @@ export const renderQcPallet = ({
 			<div className="d-flex flex-column pb-1" style={{ overflowX: "auto" }}>
 				<div className="d-flex flex-row align-items-center justify-content-around w-100 my-2">
 					<h4 className="text-start">QC Pallets</h4>
-					{!isEditing && (
+					{(!isEditing && !isViewOnly) && (
 						<button
 							className="mt-2 mb-2 btn btn-primary align-self-center"
 							type="button"
@@ -123,7 +123,7 @@ export const renderQcPallet = ({
 					return (
 						<Fragment key={index}>
 							<div className="text-nowrap">
-								{isEditing && (
+								{(isEditing && isViewOnly) && (
 									<div className="mb-1 subform-table-item">
 										<Field
 											name={`${qc_pallet}.pallet_no`}
@@ -249,7 +249,7 @@ export const renderQcPallet = ({
 										isSubForm={true}
 									/>
 								</div>
-								{!isEditing && (
+								{(!isEditing && !isViewOnly) && (
 									<div className="d-inline-block ms-3 me-2">
 										<button
 											className="me-2 btn btn-danger"

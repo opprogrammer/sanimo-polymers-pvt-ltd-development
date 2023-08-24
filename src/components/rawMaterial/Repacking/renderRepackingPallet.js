@@ -73,7 +73,7 @@ export const renderRepackingPallet = ({
 <>
 					<div
 						className="h-100"
-						style={{ overflowY: "auto", maxHeight: "50vh"}}
+						style={{ overflowY: "auto", maxHeight: "30vh"}}
 					>
 			{fields.map((repacked_pallet, index) => {
 				const netWeight = +repackedPallet?.[index]?.net_weight || 0;

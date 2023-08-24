@@ -29,6 +29,7 @@ import { isRequired } from "utils/validations";
 import { gradeOptions } from "../Grn/grnConstants";
 import { renderWipPalletForm } from "./renderWipPalletForm";
 import { entryTypeOptions } from "./wipConstants";
+import { MdClose } from "react-icons/md";
 
 const formName = "wipForm";
 const formSelector = formValueSelector(formName);
@@ -101,10 +102,12 @@ const WipForm = ({
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<Modal.Header closeButton>
-				<Modal.Title>{title}</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
+			<div className="d-flex justify-content-between">
+				{title && <h3 style={{ textTransform: "capitalize" }}>{title}</h3>}
+				<button className="btn" type="button" onClick={onCancel}>
+					<MdClose className="me-1 fs-4" />
+				</button>
+			</div>
 				<Row>
 					{initialValues?.id && (
 						<Col className="mb-1">
@@ -255,7 +258,7 @@ const WipForm = ({
 						fetchPallet={fetchPallet}
 					/>
 				</Row>
-			</Modal.Body>
+			
 			{renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)}
 		</form>
 	);

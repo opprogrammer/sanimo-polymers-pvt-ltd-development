@@ -12,12 +12,14 @@ import {
 	getWipPagination,
 } from "reducers/master";
 import { convertDateToFormat } from "utils/dateUtils";
+import { useParams } from "react-router-dom";
 import { renderActions } from "utils/renderActions";
-import WipModal from "./WipModal";
+//import WipModal from "./WipModal";
 import { tableName, wipModalName } from "./wipConstants";
 
 const Wip = () => {
 	const dispatch = useDispatch();
+	const { status } = useParams();
 
 	const wipList = useSelector(getWipMasterList);
 	const { pageSize, totalElements, currentPage } =
@@ -37,7 +39,7 @@ const Wip = () => {
 	);
 
 	const { handleAddMaster, handlePageChange, handleViewMaster } =
-		useMasterLogic(getWipData, wipModalName);
+		useMasterLogic(getWipData, null,`raw-material-${tableName}`);
 
 	const columns = [
 		{
@@ -89,7 +91,7 @@ const Wip = () => {
 				const items = [
 					{
 						label: "View",
-						onClick: () => handleViewMaster(data),
+						onClick: () => handleViewMaster(data?.id),
 					},
 					{
 						label: "Delete",
@@ -135,7 +137,7 @@ const Wip = () => {
 					handlePageChange={handlePageChange}
 				/>
 			) : null}
-			<WipModal />
+			
 		</>
 	);
 };

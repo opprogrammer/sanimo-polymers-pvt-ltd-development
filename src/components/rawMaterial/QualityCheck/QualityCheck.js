@@ -47,7 +47,7 @@ const QualityCheck = () => {
 		handleEditMaster,
 		handlePageChange,
 		handleViewMaster,
-	} = useMasterLogic(getQualityCheckData, qualityCheckModalName);
+	} = useMasterLogic(getQualityCheckData, null,`raw-material-${tableName}`);
 
 	const columns = [
 		{
@@ -99,15 +99,15 @@ const QualityCheck = () => {
 				const items = [
 					{
 						label: "View",
-						onClick: () => handleViewMaster(data),
+						onClick: () => handleViewMaster(data?.id),
 					},
 				];
 
-				if (+status === 1)
+				if (+status === 1 || +status === 2)
 					items.push(
 						{
 							label: "Edit",
-							onClick: () => handleEditMaster(data),
+							onClick: () => handleEditMaster(data?.id),
 						},
 						{
 							label: "Delete",
@@ -167,7 +167,7 @@ const QualityCheck = () => {
 					handlePageChange={handlePageChange}
 				/>
 			) : null}
-			<QualityCheckModal />
+			
 		</>
 	);
 };

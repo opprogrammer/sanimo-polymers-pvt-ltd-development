@@ -128,8 +128,9 @@ const initialState = {
 		currentPage: 1,
 	},
 	// wip
-	wipMasterList: [],
-	wipPagination: {
+	"wipMasterDetails":[],
+	"wipMasterList": [],
+	"wipPagination": {
 		pageSize: 10,
 		totalElements: 10,
 		currentPage: 1,
@@ -157,6 +158,7 @@ const initialState = {
 	},
 	// quality-check
 	"quality-checkMasterList": [],
+	"quality-checkMasterDetails": [],
 	"quality-checkPagination": {
 		pageSize: 10,
 		totalElements: 10,
@@ -369,17 +371,26 @@ export const getRepackingPagination = state => {
 
 // wip
 export const getWipMasterList = state => {
-	return state?.masterDetails?.wipMasterList;
+	return state?.masterDetails?.["wipMasterList"];
+};
+
+export const getWipMasterDetails = state => {
+	return state?.masterDetails?.["wipMasterDetails"];
 };
 
 export const getWipPagination = state => {
-	return state?.masterDetails?.wipPagination;
+	return state?.masterDetails?.["wipPagination"];
 };
 
 //qualityCheck
 export const getQualityCheckMasterList = state => {
 	return state?.masterDetails?.["quality-checkMasterList"];
 };
+
+export const getQualityCheckMasterDetails = state => {
+	return state?.masterDetails?.["quality-checkMasterDetails"];
+};
+
 
 export const getQualityCheckPagination = state => {
 	return state?.masterDetails?.["quality-checkPagination"];

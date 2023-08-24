@@ -46,7 +46,7 @@ export const renderGrnForm = ({
 			<>
 					<div
 						className="h-100"
-						style={{ overflowY: "auto", maxHeight: "50vh"}}
+						style={{ overflowY: "auto", maxHeight: "30vh"}}
 					>
 			{fields.map((repacked_grn, index) => {
 				return (

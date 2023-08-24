@@ -28,7 +28,9 @@ import Repacking from "components/rawMaterial/Repacking/Repacking";
 import RmStock from "components/rawMaterial/Stock/RmStock";
 import Wip from "components/rawMaterial/Wip/Wip";
 import GrnWrapper from "components/rawMaterial/Grn/GrnWrapper";
-import { RepackingWrapper } from "components/rawMaterial/Repacking/RepackingWrapper";
+import  {RepackingWrapper}  from "components/rawMaterial/Repacking/RepackingWrapper";
+import WipWrapper from "components/rawMaterial/Wip/WipWrapper";
+import QualityCheckWrapper from "components/rawMaterial/QualityCheck/QualityCheckWrapper";
 
 const getItem = (label, key, icon, children, onClick) => {
 	return {
@@ -115,12 +117,24 @@ const AuthorizedRoutes = () => {
 				<Route path=":mode/:id" element={<RepackingWrapper />} />
 				<Route path=":status" element={<Repacking />} />
 			</Route>
-			<Route path="/raw-material-wip/:status" element={<Wip />} exact />
-			<Route
+			{/* <Route path="/raw-material-wip/:status" element={<Wip />} exact /> */}
+			<Route path="/raw-material-wip/" element={<Outlet />}>
+				<Route index element={<Wip />} />
+				<Route path="add" element={<WipWrapper />} />
+				<Route path=":mode/:id" element={<WipWrapper />} />
+				<Route path=":status" element={<Wip />} />
+			</Route>
+			{/* <Route
 				path="/raw-material-quality-check/:status"
 				element={<QualityCheck />}
 				exact
-			/>
+			/> */}
+			<Route path="/raw-material-quality-check/" element={<Outlet />}>
+				<Route index element={<QualityCheck />} />
+				<Route path="add" element={<QualityCheckWrapper />} />
+				<Route path=":mode/:id" element={<QualityCheckWrapper />} />
+				<Route path=":status" element={<QualityCheck />} />
+			</Route>
 			<Route
 				path="/raw-material-issue-to-department/:status"
 				element={<IssueToDepartment />}

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Field } from "redux-form";
-import { ReduxFormAsyncSelect } from "utils/ReduxFormAsyncSelect";
+import { ReduxFormAsyncSelectShade } from "utils/shadeField";
 
 export const renderWipPalletForm = ({
 	fields,
@@ -20,10 +20,10 @@ export const renderWipPalletForm = ({
 	meta: { submitFailed, error },
 }) => {
 	return (
-		<div className="d-flex align-items-center justify-content-center flex-column">
+		<div className="d-flex flex-column">
 			<div className="d-flex flex-row align-items-center justify-content-around w-100 mb-2">
 				<h4 className="text-start">Wip Pallet</h4>
-				{!isEditing && (
+				{(!isEditing && !isViewOnly) && (
 					<button
 						className="mt-2 btn btn-primary"
 						type="button"
@@ -36,21 +36,26 @@ export const renderWipPalletForm = ({
 			</div>
 			{fields?.length === 0 && (
 				<>
-					<h6 className="m-2">
+					<h6 className="m-2 text-center">
 						No WIP pallet added. Click on Add WIP Pallet button to add one.
 					</h6>
 				</>
 			)}
+			<>
+					<div
+						className="h-100"
+						style={{ overflowY: "auto", maxHeight: "70vh"}}
+					>
 			{fields.map((wip_pallet, index) => {
 				return (
 					<Fragment key={index}>
 						<div className="d-flex justify-content-center align-items-center w-100">
 							<div className="align-self-start w-100">
 								<Row>
-									{entryType === "repacked_pallet" ? (
+									{ (entryType === "repacked_pallet") ?  (
 										<Col className="mb-1">
 											<Field
-												component={ReduxFormAsyncSelect}
+												component={ReduxFormAsyncSelectShade}
 												label="Repacked Pallet"
 												name={`${wip_pallet}.entry_id`}
 												disabled={isFetchingDropdown || isViewOnly || isEditing}
@@ -74,10 +79,10 @@ export const renderWipPalletForm = ({
 												isSubForm={true}
 											/>
 										</Col>
-									) : (
+									) : (!isEditing && !isViewOnly) &&(
 										<Col className="mb-1">
 											<Field
-												component={ReduxFormAsyncSelect}
+												component={ReduxFormAsyncSelectShade}
 												label="QC Pallet"
 												name={`${wip_pallet}.entry_id`}
 												disabled={isFetchingDropdown || isViewOnly || isEditing}
@@ -102,19 +107,21 @@ export const renderWipPalletForm = ({
 											/>
 										</Col>
 									)}
-									{!isEditing && (
-										<Col className="align-self-center mt-2">
-											<button
-												className="me-2 btn btn-danger"
-												type="button"
-												onClick={() => fields.remove(index)}
-											>
-												Remove
-											</button>
+									{/* {(isEditing || isViewOnly) && (
+										<Col >
+											<div className="subform-table-item">
+												<label className="form-label">{`${wip_pallet?.[index]?.entry_id}`}</label>
+												<input
+													className="form-control"
+													value={wip_pallet?.[index]?.entry_id}
+													disabled
+												/>
+											</div>
 										</Col>
-									)}
-								</Row>
-								{wipPallet?.[index]?.pallet_entry && (
+									)} */}
+									
+									<Col>
+									{wipPallet?.[index]?.pallet_entry && (
 									<div className="text-nowrap" style={{ overflowX: "auto" }}>
 										<div className="mb-1 subform-table-item">
 											<label className="fw-500">Number of Cheese</label>
@@ -158,12 +165,74 @@ export const renderWipPalletForm = ({
 										</div>
 									</div>
 								)}
+								</Col>
+									{(!isEditing && !isViewOnly) && (
+										<Col className="align-self-center mt-2">
+											<button
+												className="me-2 btn btn-danger"
+												type="button"
+												onClick={() => fields.remove(index)}
+											>
+												Remove
+											</button>
+										</Col>
+									)}
+									<Col></Col>
+									<Col></Col>
+									
+								</Row>
+								{/* {wipPallet?.[index]?.pallet_entry && (
+									<div className="text-nowrap" style={{ overflowX: "auto" }}>
+										<div className="mb-1 subform-table-item">
+											<label className="fw-500">Number of Cheese</label>
+											<input
+												className="form-control"
+												value={wipPallet?.[index]?.pallet_entry?.no_of_cheese}
+												disabled
+											/>
+										</div>
+										<div className="mb-1 subform-table-item">
+											<label className="fw-500">Number of Cartons</label>
+											<input
+												className="form-control"
+												value={wipPallet?.[index]?.pallet_entry?.no_of_cartons}
+												disabled
+											/>
+										</div>
+										<div className="mb-1 subform-table-item">
+											<label className="fw-500">Net Weight</label>
+											<input
+												className="form-control"
+												value={wipPallet?.[index]?.pallet_entry?.net_weight}
+												disabled
+											/>
+										</div>
+										<div className="mb-1 subform-table-item">
+											<label className="fw-500">Average Weight</label>
+											<input
+												className="form-control"
+												value={wipPallet?.[index]?.pallet_entry?.average_weight}
+												disabled
+											/>
+										</div>
+										<div className="mb-1 subform-table-item">
+											<label className="fw-500">Location</label>
+											<input
+												className="form-control"
+												value={wipPallet?.[index]?.pallet_entry?.location?.name}
+												disabled
+											/>
+										</div>
+									</div>
+								)} */}
 							</div>
 						</div>
 						<hr className="w-100 m-2" />
 					</Fragment>
 				);
 			})}
+			</div>
+			</>
 			{submitFailed && error && (
 				<span className="text-center ms-2 mb-2" style={{ color: "red" }}>
 					{error}
