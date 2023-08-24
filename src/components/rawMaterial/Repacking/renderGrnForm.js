@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Field, FieldArray } from "redux-form";
 import { ReduxFormAsyncSelect } from "utils/ReduxFormAsyncSelect";
-
+import { ReduxFormAsyncSelectShade } from "utils/shadeField";
 import { renderShadeList } from "./renderShadeList";
 
 export const renderGrnForm = ({
@@ -21,10 +21,10 @@ export const renderGrnForm = ({
 	meta: { submitFailed, error },
 }) => {
 	return (
-		<div className="d-flex align-items-center justify-content-center flex-column">
+		<div className="d-flex flex-column">
 			<div className="d-flex flex-row align-items-center justify-content-around w-100 mb-2">
 				<h4 className="text-start">GRN</h4>
-				{!isEditing && (
+				{(!isEditing && !isViewOnly) && (
 					<button
 						className="mt-2 btn btn-primary"
 						type="button"
@@ -37,21 +37,27 @@ export const renderGrnForm = ({
 			</div>
 			{fields?.length === 0 && (
 				<>
-					<h6 className="m-2">
+					<h6 className="m-2 text-center">
 						No shade entry added. Click on Add GRN Entry button to add one.
 					</h6>
 				</>
 			)}
+
+			<>
+					<div
+						className="h-100"
+						style={{ overflowY: "auto", maxHeight: "50vh"}}
+					>
 			{fields.map((repacked_grn, index) => {
 				return (
 					<Fragment key={index}>
-						<div className="d-flex justify-content-center align-items-center w-100">
+						<div className="d-flex  align-items-center w-100">
 							<div className="align-self-start w-100">
 								<Row>
-									{!isEditing && (
+									{(!isEditing && !isViewOnly)  && (
 										<Col className="mb-1">
 											<Field
-												component={ReduxFormAsyncSelect}
+												component={ReduxFormAsyncSelectShade}
 												label="GRN"
 												name={`${repacked_grn}.grn_no`}
 												disabled={isFetchingDropdown || isViewOnly || isEditing}
@@ -75,9 +81,9 @@ export const renderGrnForm = ({
 											/>
 										</Col>
 									)}
-									{isEditing && (
-										<Col className="mb-1">
-											<div className="mb-3 subform-table-item">
+									{(isEditing || isViewOnly) && (
+										<Col >
+											<div className="subform-table-item">
 												<label className="form-label">GRN</label>
 												<input
 													className="form-control"
@@ -87,34 +93,61 @@ export const renderGrnForm = ({
 											</div>
 										</Col>
 									)}
-									{!isEditing && (
+									{/* {(!isEditing && !isViewOnly)  && (
 										<Col className="align-self-center mt-2">
 											<button
 												className="me-2 btn btn-danger"
 												type="button"
 												onClick={() => fields.remove(index)}
+												
+											>
+												Remove
+											</button>
+										</Col>
+									)} */}
+									<Col>
+									<FieldArray
+									name={`${repacked_grn}.shade_entry`}
+									component={renderShadeList}
+									shadeList={repackedGrn?.[index]?.shade_entry}
+								/>
+								</Col>
+								<Col></Col>
+								<Col></Col>
+								{(!isEditing && !isViewOnly)  && (
+										<Col className="align-self-center mt-2">
+											<button
+												className="me-2 btn btn-danger"
+												type="button"
+												onClick={() => fields.remove(index)}
+												
 											>
 												Remove
 											</button>
 										</Col>
 									)}
 								</Row>
-								<FieldArray
+								{/* <FieldArray
 									name={`${repacked_grn}.shade_entry`}
 									component={renderShadeList}
 									shadeList={repackedGrn?.[index]?.shade_entry}
-								/>
+								/> */}
 							</div>
 						</div>
 						<hr className="w-100 my-1" />
 					</Fragment>
+					
 				);
 			})}
+			
 			{submitFailed && error && (
 				<span className="text-center ms-2 mb-2" style={{ color: "red" }}>
 					{error}
 				</span>
 			)}
+			
+			</div>
+			</>
 		</div>
 	);
 };

@@ -19,6 +19,7 @@ import { rawMaterialStatuses } from "../rawMaterialStatuses";
 import RepackingModal from "./RepackingModal";
 import { repackingModalName, tableName } from "./repackingConstants";
 
+
 const Repacking = () => {
 	const dispatch = useDispatch();
 	const { status } = useParams();
@@ -47,7 +48,7 @@ const Repacking = () => {
 		handleEditMaster,
 		handlePageChange,
 		handleViewMaster,
-	} = useMasterLogic(getRepackingData, repackingModalName);
+	} = useMasterLogic(getRepackingData, null,`raw-material-${tableName}`);
 
 	const columns = [
 		{
@@ -99,15 +100,15 @@ const Repacking = () => {
 				const items = [
 					{
 						label: "View",
-						onClick: () => handleViewMaster(data),
+						onClick: () => handleViewMaster(data?.id),
 					},
 				];
 
-				if (+status === 1)
+				if (+status === 1 || +status === 2)
 					items.push(
 						{
 							label: "Edit",
-							onClick: () => handleEditMaster(data),
+							onClick: () => handleEditMaster(data?.id),
 						},
 						{
 							label: "Delete",
@@ -164,7 +165,7 @@ const Repacking = () => {
 					handlePageChange={handlePageChange}
 				/>
 			) : null}
-			<RepackingModal />
+			
 		</>
 	);
 };

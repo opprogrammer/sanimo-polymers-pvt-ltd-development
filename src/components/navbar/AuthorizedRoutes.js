@@ -28,6 +28,7 @@ import Repacking from "components/rawMaterial/Repacking/Repacking";
 import RmStock from "components/rawMaterial/Stock/RmStock";
 import Wip from "components/rawMaterial/Wip/Wip";
 import GrnWrapper from "components/rawMaterial/Grn/GrnWrapper";
+import { RepackingWrapper } from "components/rawMaterial/Repacking/RepackingWrapper";
 
 const getItem = (label, key, icon, children, onClick) => {
 	return {
@@ -103,11 +104,17 @@ const AuthorizedRoutes = () => {
 				<Route path=":mode/:id" element={<GrnWrapper />} />
 				<Route path=":status" element={<Grn />} />
 			</Route>
-			<Route
+			{/* <Route
 				path="/raw-material-repacking/:status"
 				element={<Repacking />}
 				exact
-			/>
+			/> */}
+			<Route path="/raw-material-repacking/" element={<Outlet />}>
+				<Route index element={<Repacking />} />
+				<Route path="add" element={<RepackingWrapper />} />
+				<Route path=":mode/:id" element={<RepackingWrapper />} />
+				<Route path=":status" element={<Repacking />} />
+			</Route>
 			<Route path="/raw-material-wip/:status" element={<Wip />} exact />
 			<Route
 				path="/raw-material-quality-check/:status"

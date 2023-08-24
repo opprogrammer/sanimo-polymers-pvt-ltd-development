@@ -33,7 +33,7 @@ export const renderRepackingPallet = ({
 		<div className="d-flex flex-column pb-1" style={{ overflowX: "auto" }}>
 			<div className="d-flex flex-row align-items-center justify-content-around w-100 my-2">
 				<h4 className="text-start">Repacking Pallets</h4>
-				{!isEditing && (
+				{(!isEditing && !isViewOnly) && (
 					<button
 						className="mt-2 mb-2 btn btn-primary align-self-center"
 						type="button"
@@ -61,7 +61,7 @@ export const renderRepackingPallet = ({
 						{columnsList.map(label => (
 							<label
 								key={label}
-								className="form-label subform-table-item fw-500"
+								className="form-label subform-table-item1 fw-500"
 							>
 								{label}
 							</label>
@@ -69,6 +69,12 @@ export const renderRepackingPallet = ({
 					</div>
 				)
 			)}
+
+<>
+					<div
+						className="h-100"
+						style={{ overflowY: "auto", maxHeight: "50vh"}}
+					>
 			{fields.map((repacked_pallet, index) => {
 				const netWeight = +repackedPallet?.[index]?.net_weight || 0;
 				const noOfCheese = +repackedPallet?.[index]?.no_of_cheese || 0;
@@ -76,7 +82,7 @@ export const renderRepackingPallet = ({
 					<Fragment key={index}>
 						<div className="text-nowrap">
 							{isEditing && (
-								<div className="subform-table-item">
+								<div className="subform-table-item1">
 									<Field
 										name={`${repacked_pallet}.pallet_no`}
 										className="mt-1"
@@ -85,7 +91,7 @@ export const renderRepackingPallet = ({
 									/>
 								</div>
 							)}
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									name={`${repacked_pallet}.no_of_cheese`}
 									component={ReduxFormTextField}
@@ -99,7 +105,7 @@ export const renderRepackingPallet = ({
 									disabled={isViewOnly}
 								/>
 							</div>
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									name={`${repacked_pallet}.no_of_cartons`}
 									component={ReduxFormTextField}
@@ -110,7 +116,7 @@ export const renderRepackingPallet = ({
 									disabled={isViewOnly}
 								/>
 							</div>
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									name={`${repacked_pallet}.gross_weight`}
 									component={ReduxFormTextField}
@@ -121,7 +127,7 @@ export const renderRepackingPallet = ({
 									disabled={isViewOnly}
 								/>
 							</div>
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									name={`${repacked_pallet}.tare_weight`}
 									component={ReduxFormTextField}
@@ -132,7 +138,7 @@ export const renderRepackingPallet = ({
 									disabled={isViewOnly}
 								/>
 							</div>
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									name={`${repacked_pallet}.net_weight`}
 									component={ReduxFormTextField}
@@ -146,7 +152,7 @@ export const renderRepackingPallet = ({
 									disabled={isViewOnly}
 								/>
 							</div>
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									component={ReduxFormAsyncSelect}
 									name={`${repacked_pallet}.location_id`}
@@ -160,7 +166,7 @@ export const renderRepackingPallet = ({
 									isSubForm={true}
 								/>
 							</div>
-							<div className="subform-table-item">
+							<div className="subform-table-item1">
 								<Field
 									name={`${repacked_pallet}.average_weight`}
 									component={ReduxFormTextField}
@@ -186,6 +192,8 @@ export const renderRepackingPallet = ({
 					</Fragment>
 				);
 			})}
+			</div>
+			</>
 			{submitFailed && error && (
 				<span className="text-center ms-2 mb-2" style={{ color: "red" }}>
 					{error}

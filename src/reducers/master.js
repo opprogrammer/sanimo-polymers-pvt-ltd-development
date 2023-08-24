@@ -120,8 +120,9 @@ const initialState = {
 		currentPage: 1,
 	},
 	// repacking
-	repackingMasterList: [],
-	repackingPagination: {
+	"repackingMasterList": [],
+	"repackingMasterDetails":[],
+	"repackingPagination": {
 		pageSize: 10,
 		totalElements: 10,
 		currentPage: 1,
@@ -355,11 +356,15 @@ export const getGrnPagination = state => {
 
 // repacking
 export const getRepackingMasterList = state => {
-	return state?.masterDetails?.repackingMasterList;
+	return state?.masterDetails?.["repackingMasterList"];
+};
+
+export const getRepackingMasterDetails = state => {
+	return state?.masterDetails?.["repackingMasterDetails"];
 };
 
 export const getRepackingPagination = state => {
-	return state?.masterDetails?.repackingPagination;
+	return state?.masterDetails?.["repackingPagination"];
 };
 
 // wip
