@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import { Field } from "redux-form";
-import { ReduxFormSelectField } from "utils/ReduxFormSelectField";
+import { ReduxFormSelectFieldShade } from "utils/shadeField";
 
-import { ReduxFormAsyncSelect } from "utils/ReduxFormAsyncSelect";
-import { ReduxFormTextField } from "utils/ReduxFormTextField";
+import { ReduxFormAsyncSelectShade } from "utils/shadeField";
+import { ReduxFormTextFieldShade } from "utils/shadeField";
 import { onWheelHandler } from "utils/onWheelHandler";
 import {
 	dyeingGradationOptions,
@@ -82,7 +82,7 @@ export const renderQcPallet = ({
 					<hr className="w-100 m-1" />
 				</>
 			) : null}
-			<div className="d-flex flex-column pb-1" style={{ overflowX: "auto" }}>
+			<div className="d-flex flex-column pb-1" >
 				<div className="d-flex flex-row align-items-center justify-content-around w-100 my-2">
 					<h4 className="text-start">QC Pallets</h4>
 					{(!isEditing && !isViewOnly) && (
@@ -106,17 +106,15 @@ export const renderQcPallet = ({
 							No QC entry added. Click on Add QC Pallet button to add one.
 						</h6>
 					</>
-				) : (
-					fields?.length && (
-						<div className="text-nowrap">
-							{columnsList.map(label => (
-								<label key={label} className="subform-table-item fw-500 mb-2">
-									{label}
-								</label>
-							))}
-						</div>
-					)
-				)}
+				):null}
+				
+				
+
+<>
+		<div
+						className="h-100"
+						style={{ overflowY: "auto", maxHeight: "70vh"}}
+					>
 				{fields.map((qc_pallet, index) => {
 					const netWeight = +qcPallet?.[index]?.net_weight || 0;
 					const noOfCheese = +qcPallet?.[index]?.no_of_cheese || 0;
@@ -124,18 +122,19 @@ export const renderQcPallet = ({
 						<Fragment key={index}>
 							<div className="text-nowrap">
 								{(isEditing && isViewOnly) && (
-									<div className="mb-1 subform-table-item">
+									<div className="mb-1 subform-table-item3">
 										<Field
 											name={`${qc_pallet}.pallet_no`}
-											component={ReduxFormTextField}
+											component={ReduxFormTextFieldShade}
 											className="mt-1"
 											disabled
 										/>
 									</div>
 								)}
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
-										component={ReduxFormSelectField}
+										label="Quality Gradation"
+										component={ReduxFormSelectFieldShade}
 										name={`${qc_pallet}.quality_gradation`}
 										className="mt-1"
 										options={qualityGradationOptions}
@@ -148,9 +147,10 @@ export const renderQcPallet = ({
 										isSubForm={true}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
-										component={ReduxFormSelectField}
+										label="Dyeing Gradation"
+										component={ReduxFormSelectFieldShade}
 										name={`${qc_pallet}.dyeing_gradation`}
 										className="mt-1"
 										options={dyeingGradationOptions}
@@ -163,10 +163,11 @@ export const renderQcPallet = ({
 										isSubForm={true}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
+										label="Number of Cheese"
 										name={`${qc_pallet}.no_of_cheese`}
-										component={ReduxFormTextField}
+										component={ReduxFormTextFieldShade}
 										className="mt-1"
 										type="number"
 										onWheel={e => onWheelHandler(e)}
@@ -177,10 +178,11 @@ export const renderQcPallet = ({
 										disabled={isViewOnly}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
+										label="Number of Cartons"
 										name={`${qc_pallet}.no_of_cartons`}
-										component={ReduxFormTextField}
+										component={ReduxFormTextFieldShade}
 										className="mt-1"
 										type="number"
 										onWheel={e => onWheelHandler(e)}
@@ -188,10 +190,11 @@ export const renderQcPallet = ({
 										disabled={isViewOnly}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
+										label="Gross Weight"
 										name={`${qc_pallet}.gross_weight`}
-										component={ReduxFormTextField}
+										component={ReduxFormTextFieldShade}
 										className="mt-1"
 										type="number"
 										onWheel={e => onWheelHandler(e)}
@@ -199,10 +202,11 @@ export const renderQcPallet = ({
 										disabled={isViewOnly}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
+										label="Tare Weight"
 										name={`${qc_pallet}.tare_weight`}
-										component={ReduxFormTextField}
+										component={ReduxFormTextFieldShade}
 										className="mt-1"
 										type="number"
 										onWheel={e => onWheelHandler(e)}
@@ -210,10 +214,11 @@ export const renderQcPallet = ({
 										disabled={isViewOnly}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
+										label="Net Weight"
 										name={`${qc_pallet}.net_weight`}
-										component={ReduxFormTextField}
+										component={ReduxFormTextFieldShade}
 										className="mt-1"
 										type="number"
 										onWheel={e => onWheelHandler(e)}
@@ -224,10 +229,11 @@ export const renderQcPallet = ({
 										disabled={isViewOnly}
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
+										label="Average Weight"
 										name={`${qc_pallet}.average_weight`}
-										component={ReduxFormTextField}
+										component={ReduxFormTextFieldShade}
 										className="mt-1"
 										type="number"
 										onWheel={e => onWheelHandler(e)}
@@ -235,9 +241,10 @@ export const renderQcPallet = ({
 										disabled
 									/>
 								</div>
-								<div className="mb-1 subform-table-item">
+								<div className="mb-1 subform-table-item3">
 									<Field
-										component={ReduxFormAsyncSelect}
+										label="Location"
+										component={ReduxFormAsyncSelectShade}
 										className="mt-1"
 										name={`${qc_pallet}.location_id`}
 										disabled={isFetchingDropdown || isViewOnly}
@@ -264,6 +271,8 @@ export const renderQcPallet = ({
 						</Fragment>
 					);
 				})}
+				</div>
+				</>
 				{submitFailed && error && (
 					<span className="text-center ms-2 mb-2" style={{ color: "red" }}>
 						{error}

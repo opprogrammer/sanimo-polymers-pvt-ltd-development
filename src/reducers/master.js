@@ -137,14 +137,16 @@ const initialState = {
 	},
 	// issue-to-department
 	"issue-to-departmentMasterList": [],
+	"issue-to-departmentMasterDetails": [],
 	"issue-to-departmentPagination": {
 		pageSize: 10,
 		totalElements: 10,
 		currentPage: 1,
 	},
 	// outward
-	outwardMasterList: [],
-	outwardPagination: {
+	"outwardMasterList": [],
+	"outwardMasterDetails": [],
+	"outwardPagination": {
 		pageSize: 10,
 		totalElements: 10,
 		currentPage: 1,
@@ -401,6 +403,10 @@ export const getIssueToDepartmentMasterList = state => {
 	return state?.masterDetails?.["issue-to-departmentMasterList"];
 };
 
+export const getIssueToDepartmentMasterDetails = state => {
+	return state?.masterDetails?.["issue-to-departmentMasterDetails"];
+};
+
 export const getIssueToDepartmentPagination = state => {
 	return state?.masterDetails?.["issue-to-departmentPagination"];
 };
@@ -408,6 +414,10 @@ export const getIssueToDepartmentPagination = state => {
 //outward
 export const getOutwardMasterList = state => {
 	return state?.masterDetails?.["outwardMasterList"];
+};
+
+export const getOutwardMasterDetails = state => {
+	return state?.masterDetails?.["outwardMasterDetails"];
 };
 
 export const getOutwardPagination = state => {

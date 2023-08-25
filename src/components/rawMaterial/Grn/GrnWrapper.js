@@ -150,10 +150,10 @@ const GrnWrapper = () => {
 		);
 
 	const title = isViewOnly
-		? `Grn - ${grnDetails?.entry_no || ""}`
+		? `Grn - ${grnDetails?.grn_no || ""}`
 		: `${
 				grnDetails?.id
-					? `Edit Grn - ${grnDetails?.entry_no || ""}`
+					? `Edit Grn - ${grnDetails?.grn_no || ""}`
 					: "Add Grn"
 		  }`;
 

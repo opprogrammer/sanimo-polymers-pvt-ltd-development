@@ -19,7 +19,7 @@ import { outwardModalName, tableName } from "./outwardConstants";
 const Outward = () => {
 	const dispatch = useDispatch();
 
-	const qualityCheckList = useSelector(getOutwardMasterList);
+	const outwardList = useSelector(getOutwardMasterList);
 	const { pageSize, totalElements, currentPage } =
 		useSelector(getOutwardPagination);
 	const isFetchingMasterList = useSelector(getIsFetchingMasterList);
@@ -41,7 +41,7 @@ const Outward = () => {
 		handleEditMaster,
 		handlePageChange,
 		handleViewMaster,
-	} = useMasterLogic(getOutwardData, outwardModalName);
+	} = useMasterLogic(getOutwardData, null,`raw-material-${tableName}`);
 
 	const columns = [
 		{
@@ -113,11 +113,11 @@ const Outward = () => {
 				const items = [
 					{
 						label: "View",
-						onClick: () => handleViewMaster(data),
+						onClick: () => handleViewMaster(data?.id),
 					},
 					{
 						label: "Edit",
-						onClick: () => handleEditMaster(data),
+						onClick: () => handleEditMaster(data?.id),
 					},
 					{
 						label: "Delete",
@@ -158,14 +158,14 @@ const Outward = () => {
 				showExport={false}
 			/>
 			<Table
-				dataSource={qualityCheckList}
+				dataSource={outwardList}
 				columns={columns}
-				rowKey={qualityCheckList => qualityCheckList?.id}
+				rowKey={outwardList => outwardList?.id}
 				pagination={false}
 				loading={isFetchingMasterList}
 				bordered
 			/>
-			{qualityCheckList?.length ? (
+			{outwardList?.length ? (
 				<CustomPagination
 					totalPages={Math.ceil(totalElements / pageSize)}
 					itemsPerPage={pageSize}
@@ -174,7 +174,7 @@ const Outward = () => {
 					handlePageChange={handlePageChange}
 				/>
 			) : null}
-			<OutwardModal />
+			
 		</>
 	);
 };

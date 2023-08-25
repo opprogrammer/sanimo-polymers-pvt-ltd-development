@@ -36,6 +36,7 @@ import {
 	outwardTypeOptions,
 } from "./outwardConstants";
 import { renderOutwardStock } from "./renderOutwardStock";
+import { MdClose } from "react-icons/md";
 
 const formName = "outward";
 const formSelector = formValueSelector(formName);
@@ -229,10 +230,12 @@ const OutwardForm = ({
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<Modal.Header closeButton>
-				<Modal.Title>{title}</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
+			<div className="d-flex justify-content-between">
+				{title && <h3 style={{ textTransform: "capitalize" }}>{title}</h3>}
+				<button className="btn" type="button" onClick={onCancel}>
+					<MdClose className="me-1 fs-4" />
+				</button>
+			</div>
 				<Row>
 					{initialValues?.id && (
 						<Col className="mb-1">
@@ -280,8 +283,6 @@ const OutwardForm = ({
 							masterDropdownName="transport"
 						/>
 					</Col>
-				</Row>
-				<Row>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormTextField}
@@ -313,6 +314,39 @@ const OutwardForm = ({
 							disabled={isViewOnly}
 						/>
 					</Col>
+				</Row>
+				<Row>
+					{/* <Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							maxLength={25}
+							label="Vehicle Number"
+							name="vehicle_no"
+							placeholder="Enter Vehicle Number"
+							disabled={isViewOnly}
+						/>
+					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							maxLength={40}
+							label="Security Outward Number"
+							name="security_outward_no"
+							placeholder="Enter Security Outward Number"
+							disabled={isViewOnly}
+						/>
+					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							type="date"
+							max="9999-12-31"
+							label="Security Outward Date"
+							name="security_outward_date"
+							placeholder="Enter Security Outward Date"
+							disabled={isViewOnly}
+						/>
+					</Col> */}
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormAsyncSelect}
@@ -325,8 +359,6 @@ const OutwardForm = ({
 							placeholder="Party Name"
 						/>
 					</Col>
-				</Row>
-				<Row>
 					<Col className="mb-1">
 						<Field
 							component={ReduxFormTextField}
@@ -360,6 +392,41 @@ const OutwardForm = ({
 						/>
 					</Col>
 				</Row>
+				{/* <Row>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							maxLength={20}
+							label="Challan Number"
+							name="challan_no"
+							placeholder="Enter Challan Number"
+							disabled={isViewOnly}
+						/>
+					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormTextField}
+							type="date"
+							max="9999-12-31"
+							label="Challan Date"
+							name="challan_date"
+							placeholder="Enter Challan Date"
+							disabled={isViewOnly}
+						/>
+					</Col>
+					<Col className="mb-1">
+						<Field
+							component={ReduxFormSelectField}
+							name="outward_stock_from"
+							label="Outward Stock From"
+							options={outwardStockFromOptions}
+							disabled={isViewOnly || isEditing || outwardQuantity?.length}
+							touched={meta?.outward_stock_from?.touched}
+							error={errors?.outward_stock_from}
+						/>
+					</Col>
+					
+				</Row> */}
 				<Row>
 					<Col className="mb-1">
 						<Field
@@ -494,7 +561,6 @@ const OutwardForm = ({
 						isViewOnly={isViewOnly}
 					/>
 				</Row>
-			</Modal.Body>
 			{renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)}
 		</form>
 	);

@@ -26,7 +26,7 @@ const IssueToDepartment = () => {
 	const dispatch = useDispatch();
 	const { status } = useParams();
 
-	const qualityCheckList = useSelector(getIssueToDepartmentMasterList);
+	const issueToDepartmentList = useSelector(getIssueToDepartmentMasterList);
 	const { pageSize, totalElements, currentPage } = useSelector(
 		getIssueToDepartmentPagination
 	);
@@ -50,7 +50,7 @@ const IssueToDepartment = () => {
 		handleEditMaster,
 		handlePageChange,
 		handleViewMaster,
-	} = useMasterLogic(getIssueToDepartmentData, issueToDepartmentModalName);
+	} = useMasterLogic(getIssueToDepartmentData, null,`raw-material-${tableName}`);
 
 	const columns = [
 		{
@@ -117,15 +117,15 @@ const IssueToDepartment = () => {
 				const items = [
 					{
 						label: "View",
-						onClick: () => handleViewMaster(data),
+						onClick: () => handleViewMaster(data?.id),
 					},
 				];
 
-				if (+status === 1)
+				if (+status === 1 || +status === 2)
 					items.push(
 						{
 							label: "Edit",
-							onClick: () => handleEditMaster(data),
+							onClick: () => handleEditMaster(data?.id),
 						},
 						{
 							label: "Delete",
@@ -170,14 +170,14 @@ const IssueToDepartment = () => {
 				options={rawMaterialStatuses}
 			/>
 			<Table
-				dataSource={qualityCheckList}
+				dataSource={issueToDepartmentList}
 				columns={columns}
-				rowKey={qualityCheckList => qualityCheckList?.id}
+				rowKey={issueToDepartmentList => issueToDepartmentList?.id}
 				pagination={false}
 				loading={isFetchingMasterList}
 				bordered
 			/>
-			{qualityCheckList?.length ? (
+			{issueToDepartmentList?.length ? (
 				<CustomPagination
 					totalPages={Math.ceil(totalElements / pageSize)}
 					itemsPerPage={pageSize}
@@ -186,7 +186,7 @@ const IssueToDepartment = () => {
 					handlePageChange={handlePageChange}
 				/>
 			) : null}
-			<IssueToDepartmentModal />
+			
 		</>
 	);
 };

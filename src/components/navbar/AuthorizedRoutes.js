@@ -31,6 +31,8 @@ import GrnWrapper from "components/rawMaterial/Grn/GrnWrapper";
 import  {RepackingWrapper}  from "components/rawMaterial/Repacking/RepackingWrapper";
 import WipWrapper from "components/rawMaterial/Wip/WipWrapper";
 import QualityCheckWrapper from "components/rawMaterial/QualityCheck/QualityCheckWrapper";
+import IssueToDepartmentWrapper from "components/rawMaterial/IssueToDepartment/IssueToDepartmentWrapper";
+import OutwardWrapper from "components/rawMaterial/Outward/OutwardWrapper";
 
 const getItem = (label, key, icon, children, onClick) => {
 	return {
@@ -135,12 +137,24 @@ const AuthorizedRoutes = () => {
 				<Route path=":mode/:id" element={<QualityCheckWrapper />} />
 				<Route path=":status" element={<QualityCheck />} />
 			</Route>
-			<Route
+			{/* <Route
 				path="/raw-material-issue-to-department/:status"
 				element={<IssueToDepartment />}
 				exact
-			/>
-			<Route path="/raw-material-outward/:status" element={<Outward />} exact />
+			/> */}
+			<Route path="/raw-material-issue-to-department/" element={<Outlet />}>
+				<Route index element={<IssueToDepartment />} />
+				<Route path="add" element={<IssueToDepartmentWrapper />} />
+				<Route path=":mode/:id" element={<IssueToDepartmentWrapper />} />
+				<Route path=":status" element={<IssueToDepartment />} />
+				</Route>
+			{/* <Route path="/raw-material-outward/:status" element={<Outward />} exact /> */}
+			<Route path="/raw-material-outward/" element={<Outlet />}>
+				<Route index element={<Outward />} />
+				<Route path="add" element={<OutwardWrapper />} />
+				<Route path=":mode/:id" element={<OutwardWrapper />} />
+				<Route path=":status" element={<Outward />} />
+				</Route>
 			<Route
 				path="/raw-material-stock/:module/:type"
 				element={<RmStock />}

@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Field, FieldArray } from "redux-form";
+import { ReduxFormAsyncSelectShade } from "utils/shadeField";
 import { ReduxFormAsyncSelect } from "utils/ReduxFormAsyncSelect";
 import { ReduxFormTextField } from "utils/ReduxFormTextField";
 import { onWheelHandler } from "utils/onWheelHandler";
@@ -25,10 +26,10 @@ export const renderOutwardStock = ({
 	meta: { submitFailed, error },
 }) => {
 	return (
-		<div className="d-flex align-items-center justify-content-center flex-column">
+		<div className="d-flex   flex-column">
 			<div className="d-flex flex-row align-items-center justify-content-around w-100 mb-2">
 				<h4 className="text-start">Outward Entry</h4>
-				{!isEditing && (
+				{(!isEditing && !isViewOnly) && (
 					<button
 						className="mt-2 btn btn-primary"
 						type="button"
@@ -47,12 +48,18 @@ export const renderOutwardStock = ({
 			</div>
 			{fields?.length === 0 && (
 				<>
-					<h6 className="m-3">
+					<h6 className="m-3 text-center">
 						No outward entry added. Click on Add Outward Entry button to add
 						one.
 					</h6>
 				</>
 			)}
+
+<>
+					<div
+						className="h-100"
+						style={{ overflowY: "auto", maxHeight: "50vh"}}
+					>
 			{fields.map((outward_quantity, index) => {
 				const netWeight = +outwardQuantity?.[index]?.used_net_weight || 0;
 				const noOfCheese = +outwardQuantity?.[index]?.used_cheese || 0;
@@ -65,7 +72,7 @@ export const renderOutwardStock = ({
 									{outwardStockFrom === "GRN" && (
 										<Col className="mb-1">
 											<Field
-												component={ReduxFormAsyncSelect}
+												component={ReduxFormAsyncSelectShade}
 												label="GRN"
 												name={`${outward_quantity}.outward_stock_from_id`}
 												disabled={isFetchingDropdown || isViewOnly || isEditing}
@@ -152,7 +159,7 @@ export const renderOutwardStock = ({
 											/>
 										</Col>
 									)}
-									{!isEditing && (
+									{(!isEditing && !isViewOnly) && (
 										<Col className="align-self-center mt-2">
 											<button
 												className="me-2 btn btn-danger"
@@ -354,6 +361,8 @@ export const renderOutwardStock = ({
 					</Fragment>
 				);
 			})}
+			</div>
+			</>
 			{submitFailed && error && (
 				<span className="text-center ms-2 mb-2" style={{ color: "red" }}>
 					{error}

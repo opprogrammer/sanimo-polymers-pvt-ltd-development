@@ -9,7 +9,7 @@ import {
 	getFormSyncErrors,
 	reduxForm,
 } from "redux-form";
-
+import { MdClose } from "react-icons/md";
 import { ReduxFormTextField } from "utils/ReduxFormTextField";
 
 import apiConfig from "actions/apiConfig";
@@ -133,10 +133,12 @@ const IssueToDepartmentForm = ({
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<Modal.Header closeButton>
-				<Modal.Title>{title}</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
+			<div className="d-flex justify-content-between">
+				{title && <h3 style={{ textTransform: "capitalize" }}>{title}</h3>}
+				<button className="btn" type="button" onClick={onCancel}>
+					<MdClose className="me-1 fs-4" />
+				</button>
+			</div>
 				<Row>
 					{initialValues?.id && (
 						<Col className="mb-1">
@@ -369,7 +371,7 @@ const IssueToDepartmentForm = ({
 						metaData={meta}
 					/>
 				</Row>
-			</Modal.Body>
+			
 			{renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)}
 		</form>
 	);

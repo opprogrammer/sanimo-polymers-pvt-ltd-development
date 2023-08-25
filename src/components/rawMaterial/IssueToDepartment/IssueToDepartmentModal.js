@@ -12,6 +12,7 @@ import {
 	tableName,
 } from "./issueToDepartmentConstants";
 
+
 const IssueToDepartmentModal = () => {
 	const dispatch = useDispatch();
 	const { status } = useParams();
