@@ -107,7 +107,17 @@ export const renderQcPallet = ({
 						</h6>
 					</>
 				):null}
-				
+				{
+					fields?.length && (
+						<div className="text-nowrap">
+							{columnsList.map(label => (
+								<label key={label} className="subform-table-item4 fw-500 mb-2">
+									{label}
+								</label>
+							))}
+						</div>
+					)
+				}
 				
 
 <>
@@ -133,7 +143,7 @@ export const renderQcPallet = ({
 								)}
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Quality Gradation"
+										//label="Quality Gradation"
 										component={ReduxFormSelectFieldShade}
 										name={`${qc_pallet}.quality_gradation`}
 										className="mt-1"
@@ -149,7 +159,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Dyeing Gradation"
+										//label="Dyeing Gradation"
 										component={ReduxFormSelectFieldShade}
 										name={`${qc_pallet}.dyeing_gradation`}
 										className="mt-1"
@@ -165,7 +175,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Number of Cheese"
+										//label="Number of Cheese"
 										name={`${qc_pallet}.no_of_cheese`}
 										component={ReduxFormTextFieldShade}
 										className="mt-1"
@@ -180,7 +190,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Number of Cartons"
+										//label="Number of Cartons"
 										name={`${qc_pallet}.no_of_cartons`}
 										component={ReduxFormTextFieldShade}
 										className="mt-1"
@@ -192,7 +202,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Gross Weight"
+										//label="Gross Weight"
 										name={`${qc_pallet}.gross_weight`}
 										component={ReduxFormTextFieldShade}
 										className="mt-1"
@@ -204,7 +214,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Tare Weight"
+										//label="Tare Weight"
 										name={`${qc_pallet}.tare_weight`}
 										component={ReduxFormTextFieldShade}
 										className="mt-1"
@@ -216,7 +226,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Net Weight"
+										//label="Net Weight"
 										name={`${qc_pallet}.net_weight`}
 										component={ReduxFormTextFieldShade}
 										className="mt-1"
@@ -231,7 +241,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Average Weight"
+										//label="Average Weight"
 										name={`${qc_pallet}.average_weight`}
 										component={ReduxFormTextFieldShade}
 										className="mt-1"
@@ -243,7 +253,7 @@ export const renderQcPallet = ({
 								</div>
 								<div className="mb-1 subform-table-item3">
 									<Field
-										label="Location"
+										//label="Location"
 										component={ReduxFormAsyncSelectShade}
 										className="mt-1"
 										name={`${qc_pallet}.location_id`}

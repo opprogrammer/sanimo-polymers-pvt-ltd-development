@@ -227,7 +227,7 @@ export const renderWipPalletForm = ({
 								)} */}
 							</div>
 						</div>
-						<hr className="w-100 m-2" />
+						<hr className="w-100 mt-9" />
 					</Fragment>
 				);
 			})}

@@ -142,7 +142,7 @@ const OutwardWrapper = () => {
 			/>
 		);
     const title = isViewOnly
-    ? `Outward - ${outwardDetails?.slip_no || ""}`
+    ? `Outward -  ${outwardDetails?.outward_no || ""}`
     : `${
             outwardDetails?.id
                 ? `Edit Outward - ${outwardDetails?.outward_no || ""}`

@@ -37,6 +37,14 @@
 	margin-left: 9px;
 	margin-bottom: 0 !important;
   } 
+  
+  .subform-table-item4{
+	display: inline-grid;
+width: 135px;
+margin-left: 17px;
+margin-bottom: 0 !important;
+  }
+  
 .color-white {
 	color: var(--custom-white);
 }

@@ -102,7 +102,7 @@ export const renderOutwardStock = ({
 									{outwardStockFrom === "Repacking" && (
 										<Col className="mb-1">
 											<Field
-												component={ReduxFormAsyncSelect}
+												component={ReduxFormAsyncSelectShade}
 												label="Repacked Pallet"
 												name={`${outward_quantity}.outward_stock_from_id`}
 												disabled={isFetchingDropdown || isViewOnly || isEditing}
@@ -132,7 +132,7 @@ export const renderOutwardStock = ({
 									{outwardStockFrom === "QC" && (
 										<Col className="mb-1">
 											<Field
-												component={ReduxFormAsyncSelect}
+												component={ReduxFormAsyncSelectShade}
 												label="QC Pallet"
 												name={`${outward_quantity}.outward_stock_from_id`}
 												disabled={isFetchingDropdown || isViewOnly || isEditing}
@@ -186,7 +186,7 @@ export const renderOutwardStock = ({
 											style={{ overflowX: "auto" }}
 										>
 											{outwardStockFrom === "QC" && (
-												<div className="mb-1 subform-table-item">
+												<div className="mb-1 subform-table-items">
 													<label className="fw-500">
 														Original No of Cheese
 													</label>
@@ -211,7 +211,7 @@ export const renderOutwardStock = ({
 													disabled
 												/>
 											</div>
-											<div className="mb-1 subform-table-item">
+											<div className="mb-1 subform-table-item3">
 												<label className="fw-500">Number of Cartons</label>
 												<input
 													className="form-control"
@@ -220,7 +220,7 @@ export const renderOutwardStock = ({
 												/>
 											</div>
 											{outwardStockFrom === "QC" && (
-												<div className="mb-1 subform-table-item">
+												<div className="mb-1 subform-table-item3">
 													<label className="fw-500">Original Net Weight</label>
 													<input
 														className="form-control"
@@ -231,7 +231,7 @@ export const renderOutwardStock = ({
 													/>
 												</div>
 											)}
-											<div className="mb-1 subform-table-item">
+											<div className="mb-1 subform-table-item3">
 												<label className="fw-500">
 													{outwardStockFrom === "QC"
 														? "Current Net Weight"
@@ -245,7 +245,7 @@ export const renderOutwardStock = ({
 													disabled
 												/>
 											</div>
-											<div className="mb-1 subform-table-item">
+											<div className="mb-1 subform-table-item3">
 												<label className="fw-500">Average Weight</label>
 												<input
 													className="form-control"
