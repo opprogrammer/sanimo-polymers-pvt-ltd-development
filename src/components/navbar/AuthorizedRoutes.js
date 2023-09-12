@@ -33,6 +33,8 @@ import WipWrapper from "components/rawMaterial/Wip/WipWrapper";
 import QualityCheckWrapper from "components/rawMaterial/QualityCheck/QualityCheckWrapper";
 import IssueToDepartmentWrapper from "components/rawMaterial/IssueToDepartment/IssueToDepartmentWrapper";
 import OutwardWrapper from "components/rawMaterial/Outward/OutwardWrapper";
+import { Pallet_render } from "components/rawMaterial/Wip/PalletRender";
+
 
 const getItem = (label, key, icon, children, onClick) => {
 	return {

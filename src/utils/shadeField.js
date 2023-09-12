@@ -154,8 +154,8 @@ export const ReduxFormAsyncSelectShade = props => {
 		label = null,
 		query = {},
 		status = 2,
-		menuPosition = "relative",
-		className = "mt-0.5",
+		menuPosition = "absolute",
+		className = "mt-0.5 mb-9 h-full",
 		isSubForm = false,
 	} = props;
 

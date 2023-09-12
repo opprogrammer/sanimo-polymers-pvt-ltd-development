@@ -27,11 +27,12 @@ import { renderModalButtons } from "utils/renderModalButtons";
 import stringifyQueryParams from "utils/stringifyQueryParams";
 import { isRequired } from "utils/validations";
 import { gradeOptions } from "../Grn/grnConstants";
-import { renderWipPalletForm } from "./renderWipPalletForm";
+import { RenderWipPalletForm } from "./renderWipPalletForm";
+//import { renderWipPalletForm } from "./renderWipPalletForm";
 import { entryTypeOptions } from "./wipConstants";
 import { MdClose } from "react-icons/md";
 
-const formName = "wipForm";
+export const formName = "wipForm";
 const formSelector = formValueSelector(formName);
 
 const WipForm = ({
@@ -88,17 +89,18 @@ const WipForm = ({
 			});
 	};
 
-	useEffect(() => {
-		let totalCheese = 0;
-		let totalCartons = 0;
+	//console.log("Wippallet",wipPallet);
+	// useEffect(() => {
+	// 	let totalCheese = 0;
+	// 	let totalCartons = 0;
 
-		wipPallet?.forEach(wp => {
-			totalCheese += +wp?.pallet_entry?.no_of_cheese || 0;
-			totalCartons += +wp?.pallet_entry?.no_of_cartons || 0;
-		});
-		dispatch(change(formName, "total_cheese", totalCheese));
-		dispatch(change(formName, "total_cartons", totalCartons));
-	}, [dispatch, wipPallet]);
+	// 	wipPallet?.forEach(wp => {
+	// 		totalCheese += +wp?.pallet_entry?.no_of_cheese || 0;
+	// 		totalCartons += +wp?.pallet_entry?.no_of_cartons || 0;
+	// 	});
+	// 	dispatch(change(formName, "total_cheese", totalCheese));
+	// 	dispatch(change(formName, "total_cartons", totalCartons));
+	// }, [dispatch, wipPallet]);
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -243,7 +245,7 @@ const WipForm = ({
 				<Row className="mt-2">
 					<FieldArray
 						name="wip_pallet"
-						component={renderWipPalletForm}
+						component={RenderWipPalletForm}
 						isFetchingDropdown={isFetchingDropdown}
 						errorsData={errors}
 						metaData={meta}
@@ -257,7 +259,9 @@ const WipForm = ({
 						isEditing={isEditing}
 						fetchPallet={fetchPallet}
 					/>
+					
 				</Row>
+			
 			
 			{renderModalButtons(onCancel, isUpdatingMaster || isViewOnly)}
 		</form>
@@ -276,39 +280,39 @@ export default reduxForm({
 		isRequired(values?.shade_no) && (errors.shade_no = "Required");
 		isRequired(values?.grade) && (errors.grade = "Required");
 
-		if (isRequired(values?.wip_pallet)) {
-			errors.wip_pallet = {
-				_error: "At least one Pallet entry must be present",
-			};
-		} else {
-			const renderWipErrors = [];
-			values?.wip_pallet?.forEach((wp, targetIndex) => {
-				const referenceError = {};
+		// if (isRequired(values?.wip_pallet)) {
+		// 	errors.wip_pallet = {
+		// 		_error: "At least one Pallet entry must be present",
+		// 	};
+		// } else {
+		// 	const renderWipErrors = [];
+		// 	values?.wip_pallet?.forEach((wp, targetIndex) => {
+		// 		const referenceError = {};
 
-				isRequired(wp?.entry_id) && (referenceError.entry_id = "Required");
+		// 		isRequired(wp?.entry_id) && (referenceError.entry_id = "Required");
 
-				renderWipErrors[targetIndex] = referenceError;
-			});
-			if (renderWipErrors.length) {
-				errors.wip_pallet = renderWipErrors;
-			}
+		// 		renderWipErrors[targetIndex] = referenceError;
+		// 	});
+		// 	if (renderWipErrors.length) {
+		// 		errors.wip_pallet = renderWipErrors;
+		// 	}
 
-			if (!values?.id) {
-				let palletList = {};
-				values?.wip_pallet?.forEach(wp => {
-					if (wp?.entry_id?.value) {
-						if (wp?.entry_id?.value in palletList) {
-							errors.wip_pallet = {
-								_error: "Duplicate Pallets selected",
-							};
-							return;
-						} else {
-							palletList[wp?.entry_id?.value] = true;
-						}
-					}
-				});
-			}
-		}
+		// 	if (!values?.id) {
+		// 		let palletList = {};
+		// 		values?.wip_pallet?.forEach(wp => {
+		// 			if (wp?.entry_id?.value) {
+		// 				if (wp?.entry_id?.value in palletList) {
+		// 					errors.wip_pallet = {
+		// 						_error: "Duplicate Pallets selected",
+		// 					};
+		// 					return;
+		// 				} else {
+		// 					palletList[wp?.entry_id?.value] = true;
+		// 				}
+		// 			}
+		// 		});
+		// 	}
+		// }
 
 		return errors;
 	},

@@ -45,10 +45,20 @@ const WipWrapper = () => {
 			yarn_quality_id: formData?.yarn_quality_id?.value,
 			wip_pallet: formData?.wip_pallet?.map(wp => {
 				return {
-					entry_id: wp?.entry_id?.value || null,
+					entry_id: wp|| null,
+					//pallet_no: wp?.pallet_no?.value || null,
 				};
+				
 			}),
+			// wip_pallet: checkedIds?.map(wp => {
+			// 	return {
+			// 		entry_id: wp?.id?.value || null,
+			// 		pallet_no: wp?.pallet_no?.value || null
+			// 	};
+			// }),
+			
 		};
+		
 		if (wipDetails?.id) {
 			dispatch(
 				editMasterList(tableName, formValues, 1, "application/json", () =>
@@ -104,6 +114,18 @@ const WipWrapper = () => {
 						  }
 						: null,
 				};
+				// return {
+				// 	...rp,
+				// 	pallet_entry: { ...rp },
+				// 	entry_id: rp?.id
+				// 		|| null,
+				// 	location_id: rp?.location
+				// 		? {
+				// 				label: rp?.location?.name,
+				// 				value: rp?.location?.id,
+				// 		  }
+				// 		: null,
+				// };
 			}) || [],
 	};
 
